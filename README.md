@@ -5,4 +5,4 @@
 2. 作為包裹的下方 Table 向上 Offset Top Header 的 Height 並設定為 Absolute Position。
 
 ![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/sample01.jpg "sample01")
-
+![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/sample01.gif "sample01")
