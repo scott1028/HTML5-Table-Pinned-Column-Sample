@@ -1,11 +1,11 @@
  <html>
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
         <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
         <style>
             th {
-                height: 16px;
+                height: 22px;
             }
         </style>
     </head>
@@ -27,20 +27,29 @@
             <div table style="display: flex; position: relative; height: 600px; width: 800px; border: 2px solid #333; margin: auto;">
                 <div style="width: 200px; overflow: hidden; position: relative;" table-left>
                     <!-- Header -->
-                    <table border=1 style="width: 100%; white-space: nowrap; text-overflow: clip; position: absolute; background-color: white;" table-top-left>
-                        <thead>
-                            <tr>
-                                <th>1</th>
-                            </tr>
-                        </thead>
-                    </table>
-
-                    <!-- Body: left hide scrollbar-x, to use top: -$x px offset by JavaScript. -->
-                    <div style="overflow-y: hidden; top: 16px; position: absolute; bottom: 0px; right: 0px; left: 0px; width: 100%;" table-bottom-left>
-                        <table border=1 style="width: 100%; white-space: nowrap; top: -16px; position: relative; text-overflow: clip; margin-bottom: 16px;">
+                    <div style="overflow-y: hidden; top: 0px; position: absolute; bottom: 0px; right: 0px; left: 0px; width: 100%;" table-top-left>
+                        <table border=1 style="width: 100%; white-space: nowrap; text-overflow: clip; position: absolute;">
                             <thead>
                                 <tr>
-                                    <th>1</th>
+                                    <th ng-repeat="item in colList.slice(0, freezeCol) track by $index">{{ 'c-' + item }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in rowList track by $index">
+                                    <td ng-repeat="item in colList.slice(0, freezeCol) track by $index">
+                                        {{ item }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Body: left hide scrollbar-x, to use top: -$x px offset by JavaScript. -->
+                    <div style="overflow-y: hidden; top: 22px; position: absolute; bottom: 0px; right: 0px; left: 0px; width: 100%; background-color: white;" table-bottom-left>
+                        <table border=1 style="width: 100%; white-space: nowrap; top: -22px; position: relative; text-overflow: clip; margin-bottom: 16px;">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="item in colList.slice(0, freezeCol) track by $index">{{ 'c-' + item }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,25 +64,35 @@
                 </div>
                 <div style="flex: 1; overflow: scroll;" table-right>
                     <!-- Header -->
-                    <table border=1 style="min-width: 100%; white-space: nowrap; position: absolute; background-color: white;" table-top-right>
-                        <thead>
-                            <tr>
-                                <th>12</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div style="overflow: scroll; top: 0px; position: absolute; bottom: 0px; right: 0px; left: 200px;" table-top-right>
+                        <table border=1 style="width: 100%; white-space: nowrap; top: 0px; position: absolute;">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="item in colList.slice(freezeCol) track by $index">{{ 'c-' + item }}</th>
+                                </tr>
+                            </thead>
+                            <!-- 利用資料 td 讓欄位可以對齊 -->
+                            <tbody>
+                                <tr ng-repeat="item in rowList track by $index">
+                                    <td ng-repeat="item in colList.slice(freezeCol) track by $index">
+                                        {{ item }} {{ item }} {{ item }} {{ item }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Body -->
-                    <div style="overflow: scroll; top: 16px; position: absolute; bottom: 0px; right: 0px; left: 200px;" table-bottom-right>
+                    <div style="overflow: scroll; top: 22px; position: absolute; bottom: 0px; right: 0px; left: 200px; background-color: white;" table-bottom-right>
                         <!-- 
                             這邊必須設定 position: absolute; Content 高度才不會包含 offset 的 16px， 
                             如果設定為 relative; 整個 content 高度還是會包含 已經 top offset 的 16px;
                             To use absolute to be pretty look!
                         -->
-                        <table border=1 style="min-width: 100%; white-space: nowrap; top: -16px; position: absolute;">
+                        <table border=1 style="min-width: 100%; white-space: nowrap; top: -22px; position: absolute;">
                             <thead>
                                 <tr>
-                                    <th>2</th>
+                                    <th ng-repeat="item in colList.slice(freezeCol) track by $index">{{ 'c-' + item }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +110,8 @@
                         var rightTableContainer = $('[table-bottom-right]');
                         var leftTableContainer = $('[table-bottom-left]');
                         rightTableContainer.on('scroll', function(e){
-                            leftTableContainer.find('table:first').css('top', -1*e.target.scrollTop - 16);  // 16px is top header height
+                            leftTableContainer.find('table:first').css('top', -1 * e.target.scrollTop - 22);  // 16px is top header height
+                            $('[table-top-right] table:first').css('left', -1 * e.target.scrollLeft);
                             console.debug(e);
                         });
                     })();
