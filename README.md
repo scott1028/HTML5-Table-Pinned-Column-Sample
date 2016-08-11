@@ -7,3 +7,5 @@
 
 ![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/sample01.jpg "sample01")
 ![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/sample01.gif "sample01")
+![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/pinnedGrid#1.gif "pinnedGrid#1.gif")
+![Alt text](https://raw.githubusercontent.com/scott1028/HTML5-Table-Pinned-Column-Sample/master/pinnedGrid#2.gif "pinnedGrid#2.gif")
